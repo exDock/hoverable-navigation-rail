@@ -701,7 +701,7 @@ class _RailDestinationState extends State<_RailDestination> {
       data:
           widget.disabled
               ? widget.iconTheme.copyWith(
-                color: theme.colorScheme.onSurface.withOpacity(0.38),
+                color: theme.colorScheme.onSurface.withAlpha(97),
               )
               : widget.iconTheme,
       child: widget.icon,
@@ -710,7 +710,7 @@ class _RailDestinationState extends State<_RailDestination> {
       style:
           widget.disabled
               ? widget.labelTextStyle.copyWith(
-                color: theme.colorScheme.onSurface.withOpacity(0.38),
+                color: theme.colorScheme.onSurface.withAlpha(97),
               )
               : widget.labelTextStyle,
       child: widget.label,
@@ -985,11 +985,11 @@ class _RailDestinationState extends State<_RailDestination> {
     final Color effectiveSplashColor =
         primaryColorAlphaModified
             ? colors.primary
-            : colors.primary.withOpacity(0.12);
+            : colors.primary.withAlpha(30);
     final Color effectiveHoverColor =
         primaryColorAlphaModified
             ? colors.primary
-            : colors.primary.withOpacity(0.04);
+            : colors.primary.withAlpha(10);
     return Semantics(
       container: true,
       selected: widget.selected,
@@ -1170,7 +1170,7 @@ class _NavigationRailDefaultsM2 extends NavigationRailThemeData {
   @override
   TextStyle? get unselectedLabelTextStyle {
     return _theme.textTheme.bodyLarge!.copyWith(
-      color: _colors.onSurface.withOpacity(0.64),
+      color: _colors.onSurface.withAlpha(163),
     );
   }
 
