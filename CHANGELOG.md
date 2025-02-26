@@ -1,3 +1,7 @@
+## 1.0.1
+
+* Fixed the bug where the hover colour had an opacity of 1
+
 ## 1.0.0
 
 * Instead of extending, the HoverableNavigationRail Widget is now based on the NavigationRail Widget

@@ -981,7 +981,7 @@ class _RailDestinationState extends State<_RailDestination> {
     );
 
     final ColorScheme colors = Theme.of(context).colorScheme;
-    final bool primaryColorAlphaModified = colors.primary.a < 255.0;
+    final bool primaryColorAlphaModified = colors.primary.a < 1;
     final Color effectiveSplashColor =
         primaryColorAlphaModified
             ? colors.primary

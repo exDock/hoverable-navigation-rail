@@ -1,6 +1,6 @@
 name: hoverable_navigation_rail
 description: "A HoverableNavigationRail that gives it's children an ability to use a onHover effect"
-version: 1.0.0
+version: 1.0.1
 #publish_to: 'https://pub.dev/publishers/exdock.org'
 homepage: https://github.com/exDock/hoverable-navigation-rail
 repository: https://github.com/exDock/hoverable-navigation-rail
