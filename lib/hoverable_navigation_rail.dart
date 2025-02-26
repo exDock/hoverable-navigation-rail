@@ -18,7 +18,7 @@ class HoverableNavigationRail extends StatefulWidget {
   final double? elevation;
 
   const HoverableNavigationRail({
-    Key? key,
+    super.key,
     required this.selectedIndex,
     this.onDestinationSelected,
     required this.destinations,
@@ -32,7 +32,7 @@ class HoverableNavigationRail extends StatefulWidget {
     this.labelType,
     this.groupAlignment,
     this.elevation,
-  }) : super(key: key);
+  });
 
   @override
   State<HoverableNavigationRail> createState() =>
@@ -40,7 +40,7 @@ class HoverableNavigationRail extends StatefulWidget {
 }
 
 class _HoverableNavigationRailState extends State<HoverableNavigationRail> {
-  Map<int, bool> _hoveredStates = {};
+  final Map<int, bool> _hoveredStates = {};
 
   @override
   Widget build(BuildContext context) {
