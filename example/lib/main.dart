@@ -55,15 +55,15 @@ class _MyHomePageState extends State<MyHomePage> {
             },
             destinations: [
               HoverableNavigationRailDestination(
-                key: UniqueKey(),
+                // key: UniqueKey(),
                 icon: Icon(Icons.home),
                 label: Text("home"),
-                onHovered: (boolVar) {
+                onHoverStateChange: (boolVar) {
                   if (boolVar) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text("Home is hovered"),
-                        duration: Duration(milliseconds: 300),
+                        duration: Duration(milliseconds: 1000),
                       ),
                     );
                     return;
@@ -73,13 +73,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       content: Text(
                         "Home is not hovered, but onHovered was triggered",
                       ),
-                      duration: Duration(milliseconds: 300),
+                      duration: Duration(milliseconds: 1000),
                     ),
                   );
                 },
               ),
               HoverableNavigationRailDestination(
-                key: UniqueKey(),
+                // key: UniqueKey(),
                 icon: Icon(Icons.help),
                 label: Text("help"),
               ),
