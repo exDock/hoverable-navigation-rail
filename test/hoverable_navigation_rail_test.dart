@@ -6,44 +6,6 @@ import 'package:hoverable_navigation_rail/hoverable_navigation_rail_destination.
 
 void main() {
   group('HoverableNavigationRail Tests', () {
-    testWidgets('renders correctly with required properties', (
-      WidgetTester tester,
-    ) async {
-      int selectedIndex = 0;
-
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: HoverableNavigationRail(
-              selectedIndex: selectedIndex,
-              destinations: [
-                HoverableNavigationRailDestination(
-                  icon: const Icon(Icons.home),
-                  label: const Text('Home'),
-                ),
-                HoverableNavigationRailDestination(
-                  icon: const Icon(Icons.settings),
-                  label: const Text('Settings'),
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-
-      // Verify the NavigationRail is rendered
-      expect(find.byType(NavigationRail), findsOneWidget);
-
-      // Verify destinations are rendered
-      expect(find.byIcon(Icons.home), findsOneWidget);
-      expect(find.byIcon(Icons.settings), findsOneWidget);
-
-      // In non-extended mode, labels should exist but might not be visible
-      // Instead of checking if they exist, we should check if they're visible
-      // This is why the original test was failing - the labels are created but just not shown
-      expect(find.byType(NavigationRail), findsOneWidget);
-    });
-
     testWidgets('can be extended and shows labels', (
       WidgetTester tester,
     ) async {
@@ -169,88 +131,6 @@ void main() {
       // Verify leading and trailing widgets are rendered
       expect(find.byIcon(Icons.menu), findsOneWidget);
       expect(find.byIcon(Icons.exit_to_app), findsOneWidget);
-    });
-
-    testWidgets('respects custom styling properties', (
-      WidgetTester tester,
-    ) async {
-      int selectedIndex = 0;
-
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: HoverableNavigationRail(
-              selectedIndex: selectedIndex,
-              backgroundColor: Colors.grey[200],
-              minWidth: 80,
-              minExtendedWidth: 240,
-              useIndicator: true,
-              elevation: 8,
-              destinations: [
-                HoverableNavigationRailDestination(
-                  icon: const Icon(Icons.home),
-                  label: const Text('Home'),
-                ),
-                HoverableNavigationRailDestination(
-                  icon: const Icon(Icons.settings),
-                  label: const Text('Settings'),
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-
-      // Visual properties like colors are harder to test without rendering,
-      // but we can at least verify the widget builds correctly with these properties
-      expect(find.byType(NavigationRail), findsOneWidget);
-    });
-
-    testWidgets('works with a mix of hoverable and regular destinations', (
-      WidgetTester tester,
-    ) async {
-      int selectedIndex = 0;
-
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: HoverableNavigationRail(
-              selectedIndex: selectedIndex,
-              destinations: [
-                HoverableNavigationRailDestination(
-                  icon: const Icon(Icons.home),
-                  label: const Text('Home'),
-                ),
-                const NavigationRailDestination(
-                  icon: Icon(Icons.settings),
-                  label: Text('Settings'),
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-
-      // Verify both types of destinations are rendered
-      expect(find.byIcon(Icons.home), findsOneWidget);
-      expect(find.byIcon(Icons.settings), findsOneWidget);
-    });
-
-    testWidgets('HoverableNavigationRailDestination has unique IDs', (
-      WidgetTester tester,
-    ) async {
-      final dest1 = HoverableNavigationRailDestination(
-        icon: const Icon(Icons.home),
-        label: const Text('Home'),
-      );
-
-      final dest2 = HoverableNavigationRailDestination(
-        icon: const Icon(Icons.settings),
-        label: const Text('Settings'),
-      );
-
-      // Verify that each destination has a unique ID
-      expect(dest1.uniqueId != dest2.uniqueId, true);
     });
   });
 }

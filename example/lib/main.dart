@@ -39,9 +39,13 @@ class _MyHomePageState extends State<MyHomePage> {
     Center(child: Text("help page")),
     Center(child: Text("not hoverable page")),
   ];
+  OverlayEntry? _overlayEntry;
+  late OverlayState overlayState;
 
   @override
   Widget build(BuildContext context) {
+    overlayState = Overlay.of(context);
+
     return Scaffold(
       body: Row(
         children: [
@@ -55,37 +59,26 @@ class _MyHomePageState extends State<MyHomePage> {
             },
             destinations: [
               HoverableNavigationRailDestination(
-                // key: UniqueKey(),
                 icon: Icon(Icons.home),
                 label: Text("home"),
                 onHoverStateChange: (boolVar) {
                   if (boolVar) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text("Home is hovered"),
-                        duration: Duration(milliseconds: 1000),
-                      ),
-                    );
+                    showOverlay("Home is hovered");
                     return;
                   }
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        "Home is not hovered, but onHovered was triggered",
-                      ),
-                      duration: Duration(milliseconds: 1000),
-                    ),
-                  );
+                  _removeOverlay();
                 },
               ),
               HoverableNavigationRailDestination(
-                // key: UniqueKey(),
                 icon: Icon(Icons.help),
                 label: Text("help"),
-              ),
-              NavigationRailDestination(
-                icon: Icon(Icons.hourglass_bottom_rounded),
-                label: Text("Not hoverable"),
+                onHoverStateChange: (boolVar) {
+                  if (boolVar) {
+                    showOverlay("help is hovered");
+                    return;
+                  }
+                  _removeOverlay();
+                },
               ),
             ],
           ),
@@ -93,5 +86,41 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
     );
+  }
+
+  void _removeOverlay() {
+    _overlayEntry?.remove();
+    _overlayEntry = null;
+  }
+
+  void showOverlay(String textToDisplay) {
+    _removeOverlay(); // Remove any existing overlay first
+
+    _overlayEntry = OverlayEntry(
+      builder: (context) {
+        return Positioned(
+          left: 100,
+          child: Material(
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              width: 200,
+              decoration: BoxDecoration(
+                color: Colors.deepOrange,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withAlpha(50),
+                    blurRadius: 8,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Center(child: Text(textToDisplay)),
+            ),
+          ),
+        );
+      },
+    );
+
+    overlayState.insert(_overlayEntry!);
   }
 }
